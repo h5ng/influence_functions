@@ -83,7 +83,14 @@ K = 2
 diff = tf.subtract(x_p, c_p)
 sqrt = tf.square(diff)
 distances = tf.reduce_sum(sqrt, 2)
+
 assignments = tf.argmin(distances, 0)
+
+sess = tf.Session()
+r = sess.run(distances, feed_dict={x_p: np.expand_dims(x[:2], axis=0), c_p: np.expand_dims(centroids, axis=1)})
+r2 = sess.run(assignments, feed_dict={x_p: np.expand_dims(x[:2], axis=0), c_p: np.expand_dims(centroids, axis=1)})
+print(r)
+print(r2)
 
 means = []
 for c in range(K):
